@@ -9,11 +9,28 @@
  */
 
 #include <at_device_ec200x.h>
+#include "board.h"
 
 #define LOG_TAG                        "at.sample.ec200x"
 #include <at_log.h>
 
 #define EC200X_SAMPLE_DEIVCE_NAME        "ec200x"
+
+
+void ec200x_power_ctrl(int is_on)
+{
+    if (is_on)
+    {
+        MODULE_POWER_ON();
+        rt_kprintf("ec200x power on.");
+    }
+    else
+    {
+        MODULE_POWER_OFF();
+        rt_kprintf("ec200x power off.");
+    }
+}
+
 
 static struct at_device_ec200x _dev =
 {
@@ -24,7 +41,7 @@ static struct at_device_ec200x _dev =
     EC200X_SAMPLE_STATUS_PIN,
     EC200X_SAMPLE_WAKEUP_PIN,
     EC200X_SAMPLE_RECV_BUFF_LEN,
-    RT_NULL
+    ec200x_power_ctrl
 };
 
 static int ec200x_device_register(void)

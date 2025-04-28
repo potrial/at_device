@@ -59,7 +59,7 @@ static int ec200x_power_on(struct at_device *device)
         }
     }
 
-    rt_thread_mdelay(500);
+    rt_thread_mdelay(1000);
 
     rt_pin_write(ec200x->power_pin, PIN_LOW);
 
